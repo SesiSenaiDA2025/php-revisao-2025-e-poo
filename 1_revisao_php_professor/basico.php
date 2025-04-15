@@ -9,21 +9,17 @@
 // ---- 1. VARIÁVEIS ----
 echo "<h2>1. Variáveis</h2>";
 
-// Atribuição das variáveis
 $nome = "Maria";
 $idade = 25;
 $profissao = "Desenvolvedora";
 $salario = 5000.50;
 $ativo = true;
 
-// Exibir valores
 echo "Nome: $nome <br>";
-echo "Idade: $idade anos. <br>";
+echo "Idade: $idade anos <br>";
 echo "Profissão: $profissao <br>";
-echo "Salário:  R$ " .number_format($salario, 2, ',' , '.'). "<br>";
-echo "Status: " .($ativo ? "Ativo" : "Inativo") . "<br>";
-
-
+echo "Salário: R$ " . number_format($salario, 2, ',', '.') . "<br>";
+echo "Status: " . ($ativo ? "Ativo" : "Inativo") . "<br>";
 echo "<br>";
 echo "=============================================================================";
 
@@ -31,7 +27,7 @@ echo "==========================================================================
 echo "<h2>2. Arrays</h2>";
 
 // Array indexado
-$frutas = ["Maça", "Banana", "Laranja", "Uva", "Morango"];
+$frutas = ["Maçã", "Banana", "Laranja", "Uva", "Morango"];
 
 // Array associativo
 $funcionario = [
@@ -43,39 +39,29 @@ $funcionario = [
 
 // Array multidimensional
 $alunos = [
-    ["nome" => "Pedro", "nota" =>8.5],
-    ["nome" => "Ana", "nota" =>9.0],
-    ["nome" => "Carlos", "nota" =>7.5],
+    ["nome" => "Pedro", "nota" => 8.5],
+    ["nome" => "Ana", "nota" => 9.0],
+    ["nome" => "Carlos", "nota" => 7.5]
 ];
 
-// Exibição // Array indexado
-echo "<strong>Lista de frutas</strong> <br>";
-foreach($frutas as $fruta) {
+echo "<strong>Lista de Frutas:</strong> <br>";
+foreach ($frutas as $fruta) {
     echo "- $fruta <br>";
 }
 
-// Exibição // Array associativo
-echo "<br> <strong>Dados do funcionário</strong> <br>";
-foreach($funcionario as $chave => $valor) {
+echo "<br><strong>Dados do Funcionário:</strong> <br>";
+// A função ucfirst() no PHP serve para converter a primeira letra de uma string para maiúscula e deixar o restante das letras em minúscula.
+
+// No entanto, ucfirst() só altera a primeira letra da string. Se você precisar de uma formatação mais complexa (por exemplo, deixar todas as palavras com a primeira letra maiúscula, como em títulos), você pode usar a função ucwords().
+
+foreach ($funcionario as $chave => $valor) {
     echo ucfirst($chave) . ": $valor <br>";
 }
 
-// Exibição // Array multidimensional
-echo "<br> <strong>Dados dos alunos</strong> <br>";
-foreach($alunos as $aluno) {
+echo "<br><strong>Alunos e Notas:</strong> <br>";
+foreach ($alunos as $aluno) {
     echo "Aluno: {$aluno['nome']} - Nota: {$aluno['nota']} <br>";
 }
-
-// Exemplo (Pegar Nome só do 1º Aluno)
-echo "<br> <strong>Trazer Nome do 1º Aluno</strong> <br>";
-echo $alunos[0]["nome"];
-echo "<br>";
-
-// Exemplo (Pegar Nota só do 3º Aluno)
-echo "<br> <strong>Trazer Nota do 3º Aluno</strong> <br>";
-echo $alunos[2]["nota"];
-echo "<br>";
-
 echo "<br>";
 echo "=============================================================================";
 
@@ -83,27 +69,23 @@ echo "==========================================================================
 echo "<h2>3. Condicionais</h2>";
 
 $temperatura = 28;
-echo "Temperatura atual: " .$temperatura. "ºC <br>";
-echo "<br>";
 
-// Condicional normal
-if ($temperatura <15) {
+echo "Temperatura atual: " . $temperatura . "°C <br>";
+
+// Normal
+if ($temperatura < 15) {
     echo "Está frio! <br>";
-} elseif ($temperatura >=15 && $temperatura <25) {
-    echo "Temperatura agradável! <br>";
+} elseif ($temperatura >= 15 && $temperatura < 25) {
+    echo "A temperatura está agradável. <br>";
 } else {
     echo "Está calor! <br>";
 }
 
-echo "<br>";
+// Com ternário
+echo ($temperatura < 15) ? "Está frio! <br>" : (($temperatura >= 15 && $temperatura < 25) ? "A temperatura está agradável. <br>" : "Está calor! <br>");
 
-// Ternário
-echo ($temperatura <15) ? "Está frio! <br>" :
-(($temperatura >=15 && $temperatura <25) ?
-"Temperatura agradável! <br>" : "Está calor! <br>");
 
-// switch case
-// "w" Retorna o dia da semana (0-6) através da função "date"
+// Switch case
 $dia_semana = date("w");
 echo "Hoje é: ";
 
@@ -130,7 +112,11 @@ switch ($dia_semana) {
         echo "Sábado";
         break;
 }
+echo "<br>";
 
+// Operador ternário
+$idade = 17;
+echo "Com $idade anos: " . ($idade >= 18 ? "Maior de idade" : "Menor de idade") . "<br>";
 echo "<br>";
 echo "=============================================================================";
 
@@ -138,65 +124,50 @@ echo "==========================================================================
 echo "<h2>4. Loops</h2>";
 
 // For
-for ($i = 1; $i<=5; $i++) {
+echo "<strong>Contagem com for:</strong> <br>";
+for ($i = 1; $i <= 5; $i++) {
     echo "Número: $i <br>";
 }
 
-echo "<br>";
-
-// While (Enquanto)
-$contador =5;
-while ($contador >= 0) {
+// While
+echo "<br><strong>Contagem regressiva com while:</strong> <br>";
+$contador = 5;
+while ($contador > 0) {
     echo "Contagem: $contador <br>";
     $contador--;
-    // $contador = $contador -1;
 }
-
-echo "<br>";
-
-// Do While (Faça enquanto)
-$z=1;
-do {
-    echo "Valor: $z <br>";
-    $z++;
-}while($z<=8);
-
-echo "<br>";
 
 // Foreach com arrays
-echo "<br> <strong>Laço Foreach</strong> <br>";
-$frutas = ["Maça", "Banana", "Laranja", "Uva", "Morango"];
-
-foreach($frutas as $indice =>$fruta) {
-    echo "Frutas $indice: $fruta <br>";
+echo "<br><strong>Percorrendo array com foreach:</strong> <br>";
+$linguagens = ["PHP", "JavaScript", "Python", "Java", "C#"];
+foreach ($linguagens as $indice => $linguagem) {
+    echo "Linguagem $indice: $linguagem <br>";
 }
-
-echo "<br>";
-
-
 echo "<br>";
 echo "=============================================================================";
 
 // ---- 5. FUNÇÕES ----
 echo "<h2>5. Funções</h2>";
 
-// Função símples
+// Função simples
 function saudacao($nome) {
-    return"Olá, $nome!";
+    return "Olá, $nome!";
 }
 
-// Exibição
-echo saudacao("Carlos") ."<br>";
+// Função com parâmetros default
+function calcularMedia($nota1, $nota2, $nota3 = 0) {
+    return ($nota1 + $nota2 + $nota3) / 3;
+}
 
 // Função anônima
+// A função anônima é uma função sem nome que pode ser atribuída a uma variável.
 $dobro = function($numero) {
-    return $numero *2;
+    return $numero * 2;
 };
 
-// Exibição
+echo saudacao("Carlos") . "<br>";
+echo "Média das notas: " . number_format(calcularMedia(7.5, 8.5, 9.0), 1, ',', '.') . "<br>";
 echo "O dobro de 15 é: " . $dobro(15) . "<br>";
-
-
 
 // O fatorial de um número n é o produto de todos os inteiros de 1 até n. O fatorial de 5, por exemplo, é 5 * 4 * 3 * 2 * 1 = 120.
 
@@ -205,15 +176,12 @@ echo "O dobro de 15 é: " . $dobro(15) . "<br>";
 // Recursão é um processo onde a função chama a si mesma. No caso da função fatorial(), ela chama a si mesma com o valor de $n - 1 até que $n seja menor ou igual a 1.
 // A base da recursão (condição de parada) é quando $n <= 1, onde a função retorna 1. Isso é necessário para evitar que a função continue chamando a si mesma indefinidamente.
 
-// Função para calcular Fatorial
 function fatorial($n) {
-    if ($n <=1) return 1;
-    return $n * fatorial($n -1);
+    if ($n <= 1) return 1;
+    return $n * fatorial($n - 1);
 }
 
-// Exibir fatorial de 8
-echo "Fatorial de 8: " . fatorial(8) . "<br>";
-
+echo "Fatorial de 5: " . fatorial(5) . "<br>";
 echo "<br>";
 echo "=============================================================================";
 
@@ -221,10 +189,16 @@ echo "==========================================================================
 echo "<h2>Exercício Prático</h2>";
 
 // Função para calcular média de notas
-
-
-// 6º Digitação (Aqui)
-
+function calcularMediaNotas($notas) {
+    $soma = 0;
+    $quantidade = count($notas);
+    
+    foreach ($notas as $nota) {
+        $soma += $nota;
+    }
+    
+    return $soma / $quantidade;
+}
 
 // Criando um array com alunos e notas
 $turma = [
@@ -236,9 +210,23 @@ $turma = [
 ];
 
 // Exibindo os resultados
-
-
-// 7º Digitação (Aqui)
-
-
+echo "<strong>Boletim da Turma</strong><br>";
+foreach ($turma as $aluno) {
+    $media = calcularMediaNotas($aluno["notas"]);
+    
+    echo "Aluno(a): {$aluno['nome']} - Média: " . number_format($media, 1, ',', '.') . " - ";
+    
+    // Verificando status do aluno
+    if ($media >= 9.0) {
+        echo "<span style='color: blue;'>Excelente</span>";
+    } elseif ($media >= 7.0) {
+        echo "<span style='color: green;'>Aprovado</span>";
+    } elseif ($media >= 6.0) {
+        echo "<span style='color: orange;'>Recuperação</span>";
+    } else {
+        echo "<span style='color: red;'>Reprovado</span>";
+    }
+    
+    echo "<br>";
+}
 ?>
