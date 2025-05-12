@@ -4,10 +4,13 @@
 // ==========================================
 
 // Funções para manipular os dados
+function comer($comida) {
+    return ($comida > 0) ? $comida - 1 : 0;
+}
 
-
-// 1ª Digitação (Aqui)
-
+function dormir() {
+    return true;
+}
 
 // Criando vários cachorros
 $cachorros = [
@@ -21,10 +24,9 @@ $cachorros = [
 ];
 
 // Manipulando os cachorros
-
-
-// 2ª Digitação (Aqui)
-
+foreach ($cachorros as $key => $cachorro) {
+    $cachorros[$key]["comida"] = comer($cachorro["comida"]);
+}
 
 // Exibindo os resultados no navegador
 echo "<!DOCTYPE html>";
