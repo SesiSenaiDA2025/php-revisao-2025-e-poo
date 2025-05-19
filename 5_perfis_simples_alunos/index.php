@@ -38,6 +38,9 @@ switch ($pagina) {
     case 'lista':
         $itemController->listar();
         break;
+    case 'visualizar':
+        $itemController->visualizar($_GET['id'] ?? 0);
+        break;
     default:
         header('Location: index.php?pagina=' .(Auth::estaLogado() ? 'lista' : 'login'));
         exit;
