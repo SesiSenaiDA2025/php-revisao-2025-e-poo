@@ -6,14 +6,23 @@ session_start();
 
 // Carrega arquivos necessários
 require_once 'config/database.php';
-require_once 'Services/Auth.php';
+require_once 'services/Auth.php';
+require_once 'views/templates/header.php';
 require_once 'controllers/AuthController.php';
+require_once 'controllers/ItemController.php';
 
 // Criar objeto (Instanciar) Controle de autenticação
 $authController = new AuthController();
+$itemController = new ItemController();
 
 // Ação padrão
 $pagina = $_GET['pagina'] ?? '';
+
+// Verifica autenticação. Caso não logado redireciona
+// para a página de login
+if (!Auth::estaLogado() && !in_array($pagina, ['login', 'autenticar'])) { 
+    $pagina= 'login';
+}
 
 // Roteamento básico (Teste de autenticação)
 switch ($pagina) {
@@ -26,13 +35,10 @@ switch ($pagina) {
     case 'logout':
         $authController->logout();
         break;
-    default:
-        if (Auth::estaLogado()) {
-            echo"Login bem-sucedido! Bem-vindo, " .Auth::obterUsuario()['nome'];
-            echo"<br><a href='index.php?pagina=logout'>Sair</a>";
-        } else {
-            header('Location: index.php?pagina=login');
-            exit;
-        }
+    case 'lista':
+        $itemController->listar();
         break;
+    default:
+        header('Location: index.php?pagina=' .(Auth::estaLogado() ? 'lista' : 'login'));
+        exit;
 }
