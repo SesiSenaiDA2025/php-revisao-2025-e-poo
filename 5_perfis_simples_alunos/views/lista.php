@@ -31,7 +31,7 @@ function renderizarLista($itens) {
         foreach ($itens as $item) {
             echo "<tr>        
                     <td>{$item['id']}</td>
-                    <td>".htmlspecialchars($item['titulo'])."</td>;
+                    <td>".htmlspecialchars($item['titulo'])."</td>
                  <td>";
             
             // Links dinâmicos (Aparecem para cada item cadastrado)
