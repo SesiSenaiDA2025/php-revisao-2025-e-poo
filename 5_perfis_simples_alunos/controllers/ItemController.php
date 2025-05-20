@@ -131,8 +131,48 @@ class ItemController {
         } else {
             $_SESSION['mensagem'] = "Erro ao atualizar item.";
         }
-        
         header('Location: index.php?pagina=lista');
         exit;
     }
+
+        // Confirma exclusão
+        public function confirmarExclusao($id) {
+            if (!Auth::temPermissao('excluir')) {
+                $_SESSION['mensagem'] = "Você não tem permissão para excluir itens.";
+                header('Location: index.php?pagina=lista');
+                exit;
+            }
+
+            require_once 'models/Item.php';
+            $item = Item::buscarPorId($id);
+
+            if (!$item) {
+                $_SESSION['mensagem'] = "Item não encontrado.";
+                header('Location: index.php?pagina=lista');
+                exit;
+            }
+        
+            require_once 'views/confirmar_exclusao.php';
+            renderizarConfirmacaoExclusao($item);
+        }
+
+        // Exclui um item
+        public function excluir($id) {
+            if (!Auth::temPermissao('excluir')) {
+                $_SESSION['mensagem'] = "Você não tem permissão para excluir itens.";
+                header('Location: index.php?pagina=lista');
+                exit;
+            }
+
+            require_once 'models/Item.php';
+
+            if (Item::excluir($id)) {
+                $_SESSION['mensagem'] = "Item excluído com sucesso!";
+            } else {
+                $_SESSION['mensagem'] = "Erro ao excluir item.";
+            }
+
+            header('Location: index.php?pagina=lista');
+            exit;
+        }
 }

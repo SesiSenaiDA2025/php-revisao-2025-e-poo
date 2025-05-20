@@ -55,6 +55,12 @@ switch ($pagina) {
     case 'atualizar':
         $itemController->atualizar($_GET['id'] ?? 0);
         break;
+    case 'excluir':
+        $itemController->confirmarExclusao($_GET['id'] ?? 0);
+        break;
+    case 'excluir_confirmar':
+        $itemController->excluir($_GET['id'] ?? 0);
+        break;
     
     // Ação padrão
     default:
